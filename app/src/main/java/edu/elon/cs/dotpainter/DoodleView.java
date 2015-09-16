@@ -14,29 +14,67 @@ import java.util.ArrayList;
  */
 public class DoodleView extends View {
 
-    public final static int DEFAULT_WIDTH = 50;
 
-    private ArrayList<Dot> theDots;
-    private int theWidth = DEFAULT_WIDTH;
+    public static final int DEFAULT_COLOR_VALUE = 0;
+    public static final int DEFAULT_ALPHA_VALUE = 20;
+
+    private int theRed = DEFAULT_COLOR_VALUE;
+    private int theGreen = DEFAULT_COLOR_VALUE;
+    private int theBlue = DEFAULT_COLOR_VALUE;
+    private int theAlpha = DEFAULT_ALPHA_VALUE;
+
+    private ArrayList<Line> theLines;
+
 
     public DoodleView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        theDots = new ArrayList<Dot>();
+        theLines = new ArrayList<Line>();
     }
 
-    public int getTheWidth(){
-        return theWidth;
+    public int getTheRed(){
+        return theRed;
+    }
+    public int getTheBlue(){
+        return theBlue;
+    }
+    public int getTheGreen(){
+        return theGreen;
+    }
+    public int getTheAlpha(){
+        return theAlpha;
     }
 
-    public void setPenWidth(){
-        this.theWidth = theWidth;
+    public void setPenColor(int theRed, int theBlue, int theGreen, int theAlpha){
+        this.theRed = theRed;
+        this.theBlue = theBlue;
+        this.theGreen = theGreen;
+        this.theAlpha = theAlpha;
+    }
+
+    public void clearView(){
+        theLines = new ArrayList<Line>();
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event){
-        Dot dot = new Dot(event.getX(), event.getY(), theWidth);
-        theDots.add(dot);
+        int historySize = event.getHistorySize();
+        if(historySize > 0) {
+            int lastX = (int) event.getHistoricalX(historySize - 1);
+            int lastY = (int) event.getHistoricalY(historySize- 1);
+            Line line = new Line(lastX, lastY, event.getX(), event.getY(), theRed, theBlue, theGreen, theAlpha);
+            theLines.add(line);
+        }
+        else if (event.getAction() == MotionEvent.ACTION_UP){
+            Line line = new Line(event.getX(), event.getY() - 1, event.getX(), event.getY(), theRed, theBlue, theGreen, theAlpha);
+        }
+        else if(event.getAction() == MotionEvent.ACTION_DOWN){
+            Line line = new Line(event.getX(), event.getY() + 1, event.getX(), event.getY(), theRed, theBlue, theGreen, theAlpha);
+        }
+        else if(event.getAction() == MotionEvent.ACTION_MOVE){
+            Line line = new Line(event.getX() - 1, event.getY() - 1, event.getX(), event.getY(), theRed, theBlue, theGreen, theAlpha);
+        }
+
 
         return true;
     }
@@ -44,8 +82,8 @@ public class DoodleView extends View {
     @Override
     protected void onDraw(Canvas canvas){
 
-        for (Dot dot : theDots){
-            dot.draw(canvas);
+        for (Line line : theLines){
+            line.draw(canvas);
         }
         invalidate();
     }

@@ -3,10 +3,14 @@ package edu.elon.cs.dotpainter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class DotPainterActivity extends Activity {
+
+    public final static int WIDTH_DIALOG = 1;
 
     private DoodleView doodleView;
 
@@ -35,10 +39,32 @@ public class DotPainterActivity extends Activity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_setwidth) {
             Intent intent = new Intent(this, SetWidthDialogActivity.class);
-            startActivity(intent);
+            intent.putExtra("red", doodleView.getTheRed());
+            intent.putExtra("blue", doodleView.getTheBlue());
+            intent.putExtra("green", doodleView.getTheBlue());
+            intent.putExtra("alpha", doodleView.getTheAlpha());
+            startActivityForResult(intent, WIDTH_DIALOG);
 
         }
 
         return super.onOptionsItemSelected(item);
     }
-}
+
+    public void clearScreen(View view){
+         doodleView.clearView();
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == WIDTH_DIALOG) {
+            if (resultCode == RESULT_OK) {
+                // get the new pen width/color and tell the DoodleView
+                int red = data.getIntExtra("red", doodleView.getTheRed());
+                int green = data.getIntExtra("green", doodleView.getTheGreen());
+                int blue = data.getIntExtra("blue", doodleView.getTheBlue());
+                int alpha = data.getIntExtra("alpha", doodleView.getTheAlpha());
+                doodleView.setPenColor(red, green, blue, alpha);
+            }
+        }
+    }
+    }
