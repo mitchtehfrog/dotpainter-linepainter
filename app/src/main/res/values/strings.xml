@@ -2,7 +2,7 @@
     <string name="app_name">DotPainter</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_setwidth">Set Color/Width</string>
-    <string name="title_activity_set_width_dialog">Set Width</string>
+    <string name="title_activity_set_width_dialog">Choose a Color</string>
     <string name="action_settings">Settings</string>
     <string name="cancel_label">Cancel</string>
     <string name="ok_label">OK</string>

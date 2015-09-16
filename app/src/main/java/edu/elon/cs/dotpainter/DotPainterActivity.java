@@ -7,7 +7,9 @@ import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
+/**
+ * Created by Mitch on 9/3/2015.
+ */
 public class DotPainterActivity extends Activity {
 
     public final static int WIDTH_DIALOG = 1;

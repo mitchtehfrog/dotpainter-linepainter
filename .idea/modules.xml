@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/DotPainter.iml" filepath="$PROJECT_DIR$/DotPainter.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dotpainter-linepainter.iml" filepath="$PROJECT_DIR$/dotpainter-linepainter.iml" />
     </modules>
   </component>
 </project>

@@ -26,6 +26,7 @@ public class Line {
         paint = new Paint();
         paint.setARGB(255, red, green, blue);
         paint.setStrokeWidth((float) alpha);
+        paint.setStrokeCap(Paint.Cap.ROUND);
     }
 
     public void draw(Canvas canvas){

@@ -11,7 +11,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
-
+/**
+ * Created by Mitch on 9/3/2015.
+ */
 public class SetWidthDialogActivity extends Activity {
 
     private SeekBar redSeekBar;
@@ -19,7 +21,6 @@ public class SetWidthDialogActivity extends Activity {
     private SeekBar blueSeekBar;
     private SeekBar alphaSeekBar;
     private ImageView imageView;
-    private DoodleView doodleView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
